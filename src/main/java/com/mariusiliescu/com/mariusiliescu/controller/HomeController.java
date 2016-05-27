@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Created by Marius on 25.05.2016.
+ *
  */
 @Controller
 public class HomeController {
