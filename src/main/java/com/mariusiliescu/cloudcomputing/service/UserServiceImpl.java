@@ -19,10 +19,13 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void save(User user) {
+    public long save(User user) {
+        long id=0;
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRoles(new HashSet<>(roleRepository.findAll()));
-        userRepository.save(user);
+        User u = userRepository.save(user);
+        id = u.getId();
+        return id;
     }
 
     @Override

@@ -32,10 +32,10 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @OneToMany(mappedBy = "resolver")
+    @OneToMany( fetch = FetchType.EAGER ,mappedBy = "resolver" , cascade = CascadeType.ALL)
     private Set<Task> resolvedTaskList;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany( fetch = FetchType.EAGER ,mappedBy = "owner" , cascade = CascadeType.ALL)
     private Set<Task> myTaskList;
 
 
@@ -166,5 +166,10 @@ public class User {
      */
     public void setMyTaskList(Set<Task> myTaskList) {
         this.myTaskList = myTaskList;
+    }
+
+
+    public void addTask(Task t){
+        myTaskList.add(t);
     }
 }

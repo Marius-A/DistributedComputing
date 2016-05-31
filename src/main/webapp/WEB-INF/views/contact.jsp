@@ -3,7 +3,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
 
 <head>
   <title>Distributed Computing</title>
@@ -11,13 +11,6 @@
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mainStyle/style.css" />
-
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
 </head>
 
 <body>
@@ -30,26 +23,26 @@
           <h1>distributed_<span class="logo_colour">computing</span></h1>
           <h2>A simple, web application for  DNAD project</h2>
         </div>
-          <div style="position: relative; float: right " >
-              <c:if test="${pageContext.request.userPrincipal.name != null}">
-                  <form id="logoutForm" method="POST" action="${contextPath}/logout">
-                      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                  </form>
+        <div style="position: relative; float: right " >
+          <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <form id="logoutForm" method="POST" action="${contextPath}/logout">
+              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
 
-                  <h4>Welcome ${loggedInUser.username} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h4>
+            <h4>Welcome ${loggedInUser.username} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h4>
 
-              </c:if>
-          </div>
+          </c:if>
+        </div>
       </div>
       <div id="menubar">
         <ul id="menu">
           <!-- put class="tab_selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li class="tab_selected"><a href="home">Home</a></li>
+          <li><a href="home">Home</a></li>
           <li><a href="add_task">Add task</a></li>
           <li><a href="my_tasks">My tasks</a></li>
           <li><a href="res_task">Resolve task</a></li>
           <li><a href="view_r_tasks">View resolved tasks</a></li>
-          <li><a href="contact">Contact Us</a></li>
+          <li class="tab_selected"><a href="contact">Contact Us</a></li>
         </ul>
       </div>
     </div>
@@ -91,20 +84,16 @@
         <div id="content_top"></div>
         <div id="content">
           <!-- insert the page content here -->
-          <h1>Welcome to a_bit_boxy</h1>
-          <p>This standards compliant, simple, fixed width website template is released as an 'open source' design (under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 Licence</a>), which means that you are free to download and use it for anything you want (including modifying and amending it). All I ask is that you leave the 'design by dcarter' link in the footer of the template, but other than that...</p>
-          <p>This template is written entirely in XHTML 1.1 and CSS, and can be validated using the links in the footer.</p>
-          <p>You can view my other 'open source' template designs <a href="http://www.dcarter.co.uk/templates.html">here</a>.</p>
-          <p>This template is a fully functional 5 page website, with a <a href="styles.html">styles</a> page that gives examples of all the styles available with this design.</p>
-          <h1>Browser Compatibility</h1>
-          <p>This template has been tested in the following browsers:</p>
-          <ul>
-            <li>Internet Explorer 8</li>
-            <li>Internet Explorer 7</li>
-            <li>FireFox 3</li>
-            <li>Google Chrome 2</li>
-            <li>Safari 4</li>
-          </ul>
+          <h1>Contact Us</h1>
+          <p>You can contact us at any time so that we will not answer anyway</p>
+          <form action="" method="post">
+            <div class="form_settings">
+              <p><span>Name</span><input class="contact" type="text" name="your_name" value="" /></p>
+              <p><span>Email Address</span><input class="contact" type="text" name="your_email" value="" /></p>
+              <p><span>Message</span><textarea class="contact textarea" rows="8" cols="50" name="your_enquiry"></textarea></p>
+              <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="submit" /></p>
+            </div>
+          </form>
         </div>
         <div id="content_base"></div>
       </div>

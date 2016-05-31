@@ -10,12 +10,11 @@ import javax.validation.constraints.NotNull;
 public class Task {
     @Id
     @GeneratedValue
-    private int taskId;
+    private Long taskId;
 
     @NotNull
     private int dificultyLevel;
 
-    @NotNull
     private String sourceCode;
 
     @Enumerated(EnumType.STRING)
@@ -32,12 +31,24 @@ public class Task {
     /**
      * Task class general constructor
      * @param dificultyLevel
-     * @param sourceCode
+     * @param owner
      */
-    public Task(int dificultyLevel, String sourceCode) {
+    public Task(int dificultyLevel, User owner) {
+        this.taskId=0L;
+        this.owner=owner;
         this.dificultyLevel = dificultyLevel;
-        this.sourceCode = sourceCode;
         this.status = TaskStatus.unsolved;
+        this.sourceCode="code"+taskId;
+    }
+
+    /**
+     * Task class default constructor
+     */
+    public Task() {
+        this.taskId=0L;
+        this.dificultyLevel = 0;
+        this.status = TaskStatus.unsolved;
+        this.sourceCode="code"+taskId;
     }
 
     /**
@@ -60,7 +71,7 @@ public class Task {
      * Task id getter
      * @return
      */
-    public int getTaskId() {
+    public Long getTaskId() {
         return taskId;
     }
 
@@ -128,5 +139,9 @@ public class Task {
      */
     public void setResolver(User resolver) {
         this.resolver = resolver;
+    }
+
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
     }
 }
