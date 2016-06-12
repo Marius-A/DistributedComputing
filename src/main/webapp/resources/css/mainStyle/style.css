@@ -1,62 +1,76 @@
 /* global */
-html
-{ height: 100%;}
+html {
+  height: 100%;
+}
 
-*
-{ margin: 0;
-  padding: 0;}
+* {
+  margin: 0;
+  padding: 0;
+}
 
-body
-{ font-family: 'trebuchet ms', arial, sans-serif;
+body {
+  font-family: 'trebuchet ms', arial, sans-serif;
   font-size: .80em;
   background: #F8F8F0;
-  color: #47433F;}
+  color: #47433F;
+}
 
-p
-{ padding: 0 0 20px 0;
-  line-height: 1.7em;}
+p {
+  padding: 0 0 20px 0;
+  line-height: 1.7em;
+}
 
-img
-{ border: 0;}
+img {
+  border: 0;
+}
 
-h1, h2, h3, h4, h5, h6 
-{ font: normal 165% 'century gothic', arial, sans-serif;
+h1, h2, h3, h4, h5, h6 {
+  font: normal 165% 'century gothic', arial, sans-serif;
   color: #2DB8CD;
   margin: 0 0 14px 0;
-  padding: 10px 0 5px 0;}
+  padding: 10px 0 5px 0;
+}
 
-h2
-{ font: normal 165% 'century gothic', arial, sans-serif;
-  color: #B60000;}
+h2 {
+  font: normal 165% 'century gothic', arial, sans-serif;
+  color: #B60000;
+}
 
-h3
-{ font: normal 165% 'century gothic', arial, sans-serif;}
+h3 {
+  font: normal 165% 'century gothic', arial, sans-serif;
+}
 
-h4, h5, h6
-{ margin: 0;
+h4, h5, h6{
+  margin: 0;
   padding: 0 0 5px 0;
   font: normal 120% arial, sans-serif;
-  color: #B60000;}
+  color: #B60000;
+}
 
-h5, h6
-{ font: italic 95% arial, sans-serif;
-  color: #888;}
+h5, h6 {
+  font: italic 95% arial, sans-serif;
+  color: #888;
+}
 
-h6
-{ color: #362C20;}
+h6 {
+  color: #362C20;
+}
 
-a
-{ outline: none;
-  text-decoration: none;}
+a {
+  outline: none;
+  text-decoration: none;
+}
 
 /* image positioning - left, right and center */
-.left
-{ float: left;
-  margin-right: 10px;}
+.left {
+  float: left;
+  margin-right: 10px;
+}
 
-.right
-{ float: right; 
-  margin-left: 10px;}
+.right {
+  float: right;
+  margin-left: 10px;
+}
 
 .center
 { display: block;
@@ -317,36 +331,24 @@ ul#menu li a:hover
   border-bottom: 1px solid #fff;
   margin: 0 0 20px 0;}
   
-table
-{ margin: 10px 0 30px 0;}
 
-table tr th, table tr td
-{ background: #666;
-  color: #FFF;
-  padding: 7px 4px;}
-  
-table tr td
-{ background: #CCC;
-  color: #47433F;
-  border-top: 1px solid #EDEBE5;}
   
   
-  .button {
-  display: inline-block;
-  padding: 9px 15px;
-  font-size: 12px;
-  cursor: pointer;
+.button {
+  background-color: transparent;
+  border: 2px solid #A4AA04;
+  color: #090B0D;
+  padding: 5px 25px;
   text-align: center;
   text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 4px #999;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
 }
 
-.button:hover {background-color: #3e8e41}
+.button:hover {background-color: #A4AA04}
 
 .button:active {
   background-color: #3e8e41;
@@ -362,3 +364,30 @@ table tr td
     border:1px solid red;
     box-shadow: 0 0 10px #719ECE;
 }
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+button {
+  background-color: transparent;
+  border: 2px solid #A4AA04;
+  color: #090B0D;
+  padding: 5px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+button:hover {background-color: #A4AA04}

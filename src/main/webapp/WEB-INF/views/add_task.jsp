@@ -15,24 +15,26 @@
 </head>
 
 <body>
+
 <div id="main">
     <div id="links"></div>
     <div id="header">
+        <div style="position: relative; float: right " >
+            <c:if test="${pageContext.request.userPrincipal.name != null}">
+                <form id="logoutForm" method="POST" action="${contextPath}/logout">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+
+                <span class="logo_colour">Welcome <b>${loggedInUser.username}</b></span>
+                <span><button onclick="document.forms['logoutForm'].submit()" style="color: white">Logout</button></span>
+
+            </c:if>
+        </div>
         <div id="logo">
             <div id="logo_text">
                 <!-- class="logo_colour", allows you to change the colour of the logo text -->
                 <h1>distributed_<span class="logo_colour">computing</span></h1>
                 <h2>A simple, web application for  DNAD project</h2>
-            </div>
-            <div style="position: relative; float: right " >
-                <c:if test="${pageContext.request.userPrincipal.name != null}">
-                    <form id="logoutForm" method="POST" action="${contextPath}/logout">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    </form>
-
-                    <h4>Welcome ${loggedInUser.username} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h4>
-
-                </c:if>
             </div>
         </div>
         <div id="menubar">
@@ -117,15 +119,15 @@
                             <table cellspacing="0">
                                 <tr>
                                     <th><label >JS format only :</label></th>
-                                    <td><input name="file" type="file" accept=".js" required/>
-                                    <form:errors path="errfile" />
+                                    <td><input name="file" type="file" accept=".js"  class="button" required/>
+                                            <form:errors path="errfile" />
                                 </tr>
                                 <tr>
                                     <th><label >Dificulty level betwen 1 and 10</label></th>
                                     <td><input name="dificulty" type="number" min="1" step="1" max="10" required/>
                                 </tr>
                                 <tr>
-                                    <th><input type="Submit" value="Submit"/></th>
+                                    <th><input type="Submit" value="Post"  class="button" /></th>
                                     <td></td>
                                 </tr>
                             </table>
@@ -133,13 +135,14 @@
                     </sf:form>
                 </div>
             </div>
+            <div id="content_base"></div>
         </div>
-        <div id="content_base"></div>
     </div>
 </div>
 <div id="footer">Copyright &copy; Company Name. All Rights Reserved. | <a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.dcarter.co.uk">dcarter website templates</a></div>
 </div>
 
+<script src="${contextPath}/resources/js/modal.js"></script>
 <script>
     $('#toggle > span').click(function() {
         var ix = $(this).index();

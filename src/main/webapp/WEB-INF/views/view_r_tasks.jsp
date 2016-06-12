@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -15,21 +16,22 @@
   <div id="main">
     <div id="links"></div>
     <div id="header">
+      <div style="position: relative; float: right " >
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+          <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+          </form>
+
+          <span class="logo_colour">Welcome <b>${loggedInUser.username}</b></span>
+          <span><button onclick="document.forms['logoutForm'].submit()" style="color: white">Logout</button></span>
+
+        </c:if>
+      </div>
       <div id="logo">
         <div id="logo_text">
           <!-- class="logo_colour", allows you to change the colour of the logo text -->
           <h1>distributed_<span class="logo_colour">computing</span></h1>
           <h2>A simple, web application for  DNAD project</h2>
-        </div>
-        <div style="position: relative; float: right " >
-          <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <form id="logoutForm" method="POST" action="${contextPath}/logout">
-              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </form>
-
-            <h4>Welcome ${loggedInUser.username} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h4>
-
-          </c:if>
         </div>
       </div>
       <div id="menubar">
@@ -39,7 +41,7 @@
           <li><a href="add_task">Add task</a></li>
           <li><a href="my_tasks">My tasks</a></li>
           <li><a href="res_task">Resolve task</a></li>
-          <li class="tab_selected"><a href="view_r_task">View resolved tasks</a></li>
+          <li class="tab_selected"><a href="view_r_tasks">View resolved tasks</a></li>
           <li><a href="contact">Contact Us</a></li>
         </ul>
       </div>
@@ -81,6 +83,7 @@
       <div id="content_container">
         <div id="content_top"></div>
         <div id="content">
+          <br/>
           <c:if test="${empty loggedInUser.resolvedTaskList}">
             You don't have any resolved tasks
           </c:if>
@@ -91,6 +94,7 @@
                 <th>#Task ID</th>
                 <th>Dificulty Level</th>
                 <th>Owner</th>
+                <th>Date Solved</th>
               </tr>
               </thead>
               <tbody>
@@ -106,17 +110,27 @@
                       <td>${task.owner.username}</td>
                     </c:otherwise>
                   </c:choose>
+                  <c:choose>
+                    <c:when test="${empty task.dateSolved }" >
+                      <td>-</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td>${task.dateSolved}</td>
+                    </c:otherwise>
+                  </c:choose>
                 </tr>
 
               </c:forEach>
               </tbody>
             </table>
           </c:if>
+          <br/>
         </div>
         <div id="content_base"></div>
       </div>
     </div>
     <div id="footer">Copyright &copy; Company Name. All Rights Reserved. | <a href="http://validator.w3.org/check?uri=referer">XHTML</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | <a href="http://www.dcarter.co.uk">dcarter website templates</a></div>
   </div>
+
 </body>
 </html>

@@ -17,21 +17,22 @@
   <div id="main">
     <div id="links"></div>
     <div id="header">
+      <div style="position: relative; float: right " >
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+          <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+          </form>
+
+          <span class="logo_colour">Welcome <b>${loggedInUser.username}</b></span>
+          <span><button onclick="document.forms['logoutForm'].submit()" style="color: white">Logout</button></span>
+
+        </c:if>
+      </div>
       <div id="logo">
         <div id="logo_text">
           <!-- class="logo_colour", allows you to change the colour of the logo text -->
           <h1>distributed_<span class="logo_colour">computing</span></h1>
           <h2>A simple, web application for  DNAD project</h2>
-        </div>
-        <div style="position: relative; float: right " >
-          <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <form id="logoutForm" method="POST" action="${contextPath}/logout">
-              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </form>
-
-            <h4>Welcome ${loggedInUser.username} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h4>
-
-          </c:if>
         </div>
       </div>
       <div id="menubar">

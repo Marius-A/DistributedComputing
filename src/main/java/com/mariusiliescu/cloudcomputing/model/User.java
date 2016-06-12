@@ -172,4 +172,8 @@ public class User {
     public void addTask(Task t){
         myTaskList.add(t);
     }
+
+    public void addResTask(Task t){
+        resolvedTaskList.add(t);
+    }
 }

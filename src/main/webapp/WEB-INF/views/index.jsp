@@ -12,6 +12,7 @@
   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mainStyle/style.css" />
 
+
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -24,22 +25,24 @@
   <div id="main">
     <div id="links"></div>
     <div id="header">
+      <div style="position: relative; float: right " >
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+          <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+          </form>
+
+          <span class="logo_colour">Welcome <b>${loggedInUser.username}</b></span>
+          <span><button onclick="document.forms['logoutForm'].submit()" style="color: white">Logout</button></span>
+
+        </c:if>
+
+      </div>
       <div id="logo">
         <div id="logo_text">
           <!-- class="logo_colour", allows you to change the colour of the logo text -->
           <h1>distributed_<span class="logo_colour">computing</span></h1>
           <h2>A simple, web application for  DNAD project</h2>
         </div>
-          <div style="position: relative; float: right " >
-              <c:if test="${pageContext.request.userPrincipal.name != null}">
-                  <form id="logoutForm" method="POST" action="${contextPath}/logout">
-                      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                  </form>
-
-                  <h4>Welcome ${loggedInUser.username} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h4>
-
-              </c:if>
-          </div>
       </div>
       <div id="menubar">
         <ul id="menu">
@@ -90,13 +93,6 @@
       <div id="content_container">
         <div id="content_top"></div>
         <div id="content">
-          <!-- insert the page content here -->
-          <h1>Welcome to a_bit_boxy</h1>
-          <p>This standards compliant, simple, fixed width website template is released as an 'open source' design (under the <a href="http://creativecommons.org/licenses/by/3.0">Creative Commons Attribution 3.0 Licence</a>), which means that you are free to download and use it for anything you want (including modifying and amending it). All I ask is that you leave the 'design by dcarter' link in the footer of the template, but other than that...</p>
-          <p>This template is written entirely in XHTML 1.1 and CSS, and can be validated using the links in the footer.</p>
-          <p>You can view my other 'open source' template designs <a href="http://www.dcarter.co.uk/templates.html">here</a>.</p>
-          <p>This template is a fully functional 5 page website, with a <a href="styles.html">styles</a> page that gives examples of all the styles available with this design.</p>
-          <h1>Browser Compatibility</h1>
           <p>This template has been tested in the following browsers:</p>
           <ul>
             <li>Internet Explorer 8</li>

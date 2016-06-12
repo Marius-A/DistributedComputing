@@ -14,9 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 @Controller
@@ -25,6 +30,8 @@ public class FileUploadController {
     private UserService userService;
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private HttpServletRequest request;
 
 
 
@@ -48,15 +55,29 @@ public class FileUploadController {
                 Task task = new Task(dificulty,loggedUser);
                 Long taskId = taskService.save(task);
                 task.setTaskId(taskId);
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date currentDate = new Date();
+                try {
+                    task.setDateAdded(formatter.parse(formatter.format(currentDate)));
+                } catch (ParseException e) {}
+
                 loggedUser.addTask(task);
 
                 String filename= new String("code");
                 filename = filename.concat(taskId+".js");
                 System.out.print("filename:  "+filename);
 
+                String uploadsDir = "/uploads/";
+                String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
+                if(! new File(realPathtoUploads).exists())
+                {
+                    new File(realPathtoUploads).mkdir();
+                }
 
-                File file = new File("D:/temp/"+filename);
+
+                File file = new File(realPathtoUploads+"/"+filename);
                 FileUtils.writeStringToFile(file,code);
+                System.out.print(file.getAbsolutePath());
 
                 User user = null;
                 String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -64,12 +85,11 @@ public class FileUploadController {
                 session.setAttribute("loggedInUser", user);
 
 
-            } catch (RuntimeException re) {
+            } catch (RuntimeException | IOException re) {
                 //bindingResult.rejectValue("errfile", "messageCode", "No file inserted");
+                //// TODO: 03.06.2016  remove task
                 System.out.print("runtime ex");
                 return "redirect:add_task";
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return "add_task";
@@ -91,6 +111,11 @@ public class FileUploadController {
                 Task task = new Task(dificulty,loggedUser);
                 Long taskId = taskService.save(task);
                 task.setTaskId(taskId);
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date currentDate = new Date();
+                try {
+                    task.setDateAdded(formatter.parse(formatter.format(currentDate)));
+                } catch (ParseException e) {}
                 loggedUser.addTask(task);
 
                 String filename= new String("code");
@@ -124,7 +149,15 @@ public class FileUploadController {
     private void saveCode(String filename, MultipartFile code)
             throws RuntimeException, IOException {
         try {
-            File file = new File("D:/temp/"+filename);
+            String uploadsDir = "/uploads/";
+            String realPathtoUploads =  request.getServletContext().getRealPath(uploadsDir);
+            if(! new File(realPathtoUploads).exists())
+            {
+                new File(realPathtoUploads).mkdir();
+            }
+
+
+            File file = new File(realPathtoUploads+"/"+filename);
 
             FileUtils.writeByteArrayToFile(file, code.getBytes());
             System.out.println("Go to the location:  " + file.toString()

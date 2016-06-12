@@ -2,6 +2,7 @@ package com.mariusiliescu.cloudcomputing.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * Created by Marius on 27.05.2016.
@@ -15,7 +16,7 @@ public class Task {
     @NotNull
     private int dificultyLevel;
 
-    private String sourceCode;
+    private double result;
 
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
@@ -28,6 +29,10 @@ public class Task {
     @JoinColumn(name="resolver_id")
     private User resolver;
 
+    private Date dateAdded;
+
+    private Date dateSolved;
+
     /**
      * Task class general constructor
      * @param dificultyLevel
@@ -38,7 +43,7 @@ public class Task {
         this.owner=owner;
         this.dificultyLevel = dificultyLevel;
         this.status = TaskStatus.unsolved;
-        this.sourceCode="code"+taskId;
+        this.result = 0.0;
     }
 
     /**
@@ -48,7 +53,7 @@ public class Task {
         this.taskId=0L;
         this.dificultyLevel = 0;
         this.status = TaskStatus.unsolved;
-        this.sourceCode="code"+taskId;
+        this.result = 0.0;
     }
 
     /**
@@ -76,19 +81,19 @@ public class Task {
     }
 
     /**
-     * Task sourcecode getter
-     * @return task sourcecode
+     * Task result getter
+     * @return task result
      */
-    public String getSourceCode() {
-        return sourceCode;
+    public Double getTaskResult() {
+        return result;
     }
 
     /**
-     * Task sourcecode setter
-     * @param sourceCode
+     * Task result setter
+     * @param result
      */
-    public void setSourceCode(String sourceCode) {
-        this.sourceCode = sourceCode;
+    public void setTaskResult(Double result) {
+        this.result = result;
     }
 
     /**
@@ -143,5 +148,22 @@ public class Task {
 
     public void setTaskId(Long taskId) {
         this.taskId = taskId;
+    }
+
+
+    public Date getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    public Date getDateSolved() {
+        return dateSolved;
+    }
+
+    public void setDateSolved(Date dateSolved) {
+        this.dateSolved = dateSolved;
     }
 }
