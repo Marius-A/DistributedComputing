@@ -8,7 +8,7 @@ Technologies used:
 
 **Description+ScreenShots**
 
-*You can directly acces clowdcompiting app by installing the chrome extension.
+*You can directly acces clowdcomputing app by installing the chrome extension.
 ![alt tag](https://i.imgsafe.org/e880958a9c.png)
 
 *Each client can register and then login with his username / email address and password.
